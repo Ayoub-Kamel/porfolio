@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-fraunces);
+  --font-mono: var(--font-mono-jet);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Paper — warm, archival, not sterile white */
+  --background: oklch(0.986 0.003 95);
+  --foreground: oklch(0.22 0.025 255);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.025 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.025 255);
+
+  /* Ink navy — the institutional voice */
+  --primary: oklch(0.27 0.045 258);
+  --primary-foreground: oklch(0.98 0.004 95);
+
+  --secondary: oklch(0.955 0.006 250);
+  --secondary-foreground: oklch(0.27 0.045 258);
+
+  --muted: oklch(0.955 0.006 250);
+  --muted-foreground: oklch(0.51 0.02 255);
+
+  --accent: oklch(0.945 0.012 250);
+  --accent-foreground: oklch(0.27 0.045 258);
+
+  --destructive: oklch(0.58 0.2 27);
+
+  --border: oklch(0.905 0.008 255);
+  --input: oklch(0.905 0.008 255);
+  --ring: oklch(0.55 0.06 255);
+
+  /* Signal accent — brass, used sparingly for emphasis */
+  --gold: oklch(0.62 0.11 68);
+  --gold-soft: oklch(0.93 0.04 78);
+}
+
+.dark {
+  --background: oklch(0.175 0.02 258);
+  --foreground: oklch(0.95 0.005 95);
+
+  --card: oklch(0.215 0.022 258);
+  --card-foreground: oklch(0.95 0.005 95);
+  --popover: oklch(0.215 0.022 258);
+  --popover-foreground: oklch(0.95 0.005 95);
+
+  --primary: oklch(0.93 0.008 95);
+  --primary-foreground: oklch(0.21 0.025 258);
+
+  --secondary: oklch(0.26 0.022 258);
+  --secondary-foreground: oklch(0.95 0.005 95);
+
+  --muted: oklch(0.26 0.022 258);
+  --muted-foreground: oklch(0.7 0.018 255);
+
+  --accent: oklch(0.29 0.025 258);
+  --accent-foreground: oklch(0.95 0.005 95);
+
+  --destructive: oklch(0.65 0.18 25);
+
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.6 0.04 255);
+
+  --gold: oklch(0.76 0.11 72);
+  --gold-soft: oklch(0.34 0.045 70);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv05" 1, "ss01" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--gold-soft);
+    color: var(--foreground);
+  }
+}
+
+@layer components {
+  /* Hairline rule used to separate editorial blocks */
+  .rule {
+    @apply h-px w-full bg-border;
+  }
+
+  /* Small-caps eyebrow label above section headings */
+  .eyebrow {
+    @apply font-mono text-[0.6875rem] uppercase tracking-[0.18em] text-muted-foreground;
+  }
+
+  /* Tabular figures for any rendered number */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Faint blueprint grid for hero / section backdrops */
+.grid-field {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 20%, transparent 78%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
